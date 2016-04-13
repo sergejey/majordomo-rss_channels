@@ -21,7 +21,7 @@ class rss_channels extends module {
 function rss_channels() {
   $this->name="rss_channels";
   $this->title="<#LANG_MODULE_RSS_CHANNELS#>";
-  $this->module_category="<#LANG_SECTION_SETTINGS#>";
+  $this->module_category="<#LANG_SECTION_APPLICATIONS#>";
   $this->checkInstalled();
 }
 /**
@@ -259,11 +259,12 @@ function usual(&$out) {
                                                                 $rec['TITLE'] = $this->convertObjDataToStr($item->title);
                                                                 $rec['BODY'] = $this->convertObjDataToStr($item->description);
                                                                 $rec['URL'] = $this->convertObjDataToStr($item->link);
-                                                                $rec['GUID']  = $rec['URL'];
+                                                                $rec['GUID'] = $this->convertObjDataToStr($item->guid);
+                                                                if (!$rec['GUID']) {
+                                                                 $rec['GUID']  = $rec['URL'];
+                                                                }
                                                                 $timestamp = strtotime($rec['ADDED']);
-                                                                //print_r($rec);
-                                                                //exit;
-                                                                $tmp=SQLSelectOne("SELECT ID FROM rss_items WHERE GUID='".DBSafe($rec['GUID'])."'");
+                                                                $tmp=SQLSelectOne("SELECT ID FROM rss_items WHERE GUID LIKE '".DBSafe($rec['GUID'])."'");
                                                                 if (!$tmp['ID']) {
                                                                  $rec['ID']=SQLInsert('rss_items', $rec);
                                                                  if ($ch['SCRIPT_ID']) {
