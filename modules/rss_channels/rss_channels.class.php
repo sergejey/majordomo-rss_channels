@@ -259,10 +259,17 @@ function usual(&$out) {
                                                                 $rec['TITLE'] = $this->convertObjDataToStr($item->title);
                                                                 $rec['BODY'] = $this->convertObjDataToStr($item->description);
                                                                 $rec['URL'] = $this->convertObjDataToStr($item->link);
+                                                                if (strlen($rec['URL'])>255) {
+                                                                 $rec['URL']=substr($rec['URL'], 0, 255);
+                                                                }
                                                                 $rec['GUID'] = $this->convertObjDataToStr($item->guid);
                                                                 if (!$rec['GUID']) {
                                                                  $rec['GUID']  = $rec['URL'];
                                                                 }
+                                                                if (strlen($rec['GUID'])>255) {
+                                                                 $rec['GUID']=substr($rec['GUID'], 0, 255);
+                                                                }
+
                                                                 $timestamp = strtotime($rec['ADDED']);
                                                                 $tmp=SQLSelectOne("SELECT ID FROM rss_items WHERE GUID LIKE '".DBSafe($rec['GUID'])."'");
                                                                 if (!$tmp['ID']) {
