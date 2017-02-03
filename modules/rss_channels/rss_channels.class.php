@@ -31,7 +31,7 @@ function rss_channels() {
 *
 * @access public
 */
-function saveParams($data = 1) {
+function saveParams($data = 0) {
  $p=array();
  if (IsSet($this->id)) {
   $p["id"]=$this->id;
