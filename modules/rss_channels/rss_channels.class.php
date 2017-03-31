@@ -236,7 +236,7 @@ function usual(&$out) {
   curl_close($cch);
   */
   $rssdata = getURL($ch['URL'], 0);
-  $data = simplexml_load_string($rssdata);
+  $data = @simplexml_load_string($rssdata);
 
                                         if ($data)
                                         {
