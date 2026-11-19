@@ -7,7 +7,6 @@
 <li> 
 <a href="?"><#LANG_HOME#></a>
 </li>
-<span class="divider">/</span>
 <li class="active">
 [#if ID=""#]
 <#LANG_NEW_RECORD#>
@@ -27,24 +26,24 @@
 [#endif ERR#]
 
 
-<div class="form-group ">
-        <label class="col-lg-4 control-label" for="inputTitle"><#LANG_TITLE#>:<font color="red">*</font></label>
-        <div class="col-lg-5"><input type="text"  class="form-control [#if ERR_TITLE#]alert-danger[#endif#]"  name="title" value="[#TITLE#]" required="true"></div>
+<div class="form-group[#if ERR_TITLE#] has-error[#endif#]">
+        <label class="col-lg-4 control-label" for="title"><#LANG_TITLE#>:<span class="text-danger">*</span></label>
+        <div class="col-lg-5"><input type="text"  id="title" class="form-control"  name="title" value="[#TITLE#]" required="true"></div>
 </div>
-<div class="form-group ">
-        <label class="col-lg-4 control-label" for="inputTitle"><#LANG_SOURCE_URL#>:<font color="red">*</font></label>
-        <div class="col-lg-5"><input type="text"  class="form-control [#if ERR_URL#]alert-danger[#endif#]"  name="url" value="[#URL#][#if URL=""#]http://[#endif#]" required="true"></div>
-</div>
-
-<div class="form-group ">
-        <label class="col-lg-4 control-label" for="inputTitle"><#LANG_CHECK_EVERY#> (<#LANG_MINUTES#>):<font color="red">*</font></label>
-        <div class="col-lg-5"><input type="text"  class="form-control [#if ERR_UPDATE_EVERY#]alert-danger[#endif#]"  name="update_every" value="[#UPDATE_EVERY#]" required="true"></div>
+<div class="form-group[#if ERR_URL#] has-error[#endif#]">
+        <label class="col-lg-4 control-label" for="url"><#LANG_SOURCE_URL#>:<span class="text-danger">*</span></label>
+        <div class="col-lg-5"><input type="text"  id="url" class="form-control"  name="url" value="[#URL#][#if URL=""#]http://[#endif#]" required="true"></div>
 </div>
 
-<div class="form-group ">
-        <label class="col-lg-4 control-label" for="inputTitle"><#LANG_EXECUTE_FOR_NEW_RECORDS#>:<font color="red">*</font></label>
+<div class="form-group[#if ERR_UPDATE_EVERY#] has-error[#endif#]">
+        <label class="col-lg-4 control-label" for="update_every"><#LANG_CHECK_EVERY#> (<#LANG_MINUTES#>):<span class="text-danger">*</span></label>
+        <div class="col-lg-5"><input type="text"  id="update_every" class="form-control"  name="update_every" value="[#UPDATE_EVERY#]" required="true"></div>
+</div>
+
+<div class="form-group[#if ERR_SCRIPT_ID#] has-error[#endif#]">
+        <label class="col-lg-4 control-label" for="script_id"><#LANG_EXECUTE_FOR_NEW_RECORDS#>:<span class="text-danger">*</span></label>
         <div class="col-lg-5">
-		 <select name="script_id" class="form-control [#if ERR_SCRIPT_ID#]alert-danger[#endif#]">
+		 <select name="script_id" id="script_id" class="form-control">
 		   <option value="0">
 		   [#begin SCRIPTS#]
 		   <option value="[#ID#]"[#if ID="<#SCRIPT_ID#>"#] selected[#endif#]>[#TITLE#]
@@ -56,11 +55,11 @@
 
 
 <div class="form-group">
-     <div class="col-lg-offset-1 col-lg-5">
+     <div class="col-lg-offset-4 col-lg-5">
  [#if ID!=""#]
- <input type="submit" class="btn btn-default btn-primary" name="subm" value="<#LANG_UPDATE#>">
+ <input type="submit" class="btn btn-primary" name="subm" value="<#LANG_UPDATE#>">
  [#else ID#]
- <input type="submit" class="btn btn-default btn-primary" name="subm" value="<#LANG_ADD#>">
+ <input type="submit" class="btn btn-primary" name="subm" value="<#LANG_ADD#>">
  [#endif ID#]
  &nbsp;
  <a href="?data_source=<#DATA_SOURCE#>" class="btn btn-default "><#LANG_CANCEL#></a>
